@@ -3,10 +3,12 @@ package com.example.musicalplayer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         listView=findViewById(R.id.listviewsong);
         runtimePermission();
 
@@ -85,6 +88,16 @@ public class MainActivity extends AppCompatActivity {
 
         customAdapter customAdapter=new customAdapter();
         listView.setAdapter(customAdapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String songname=(String)listView.getItemAtPosition(position);
+                startActivity(new Intent(getApplicationContext(),PlayerActivity.class).putExtra("songs",mysongs).putExtra("songname",songname)
+                .putExtra("pos",position));
+            }
+        });
     }
 
 
