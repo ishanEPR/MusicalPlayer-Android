@@ -89,15 +89,28 @@ public class MainActivity extends AppCompatActivity {
         customAdapter customAdapter=new customAdapter();
         listView.setAdapter(customAdapter);
 
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
                 String songname=(String)listView.getItemAtPosition(position);
-                startActivity(new Intent(getApplicationContext(),PlayerActivity.class).putExtra("songs",mysongs).putExtra("songname",songname)
-                .putExtra("pos",position));
+                Intent intent=new Intent(getApplicationContext(),PlayerActivity.class);
+                intent.putExtra("songs",mysongs);
+                intent.putExtra("songname",songname);
+                intent.putExtra("pos",position);
+                startActivity(intent);
             }
         });
+
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String songname=(String)listView.getItemAtPosition(position);
+//                startActivity(new Intent(getApplicationContext(),PlayerActivity.class).putExtra("songs",mysongs).putExtra("songname",songname)
+//                .putExtra("pos",position));
+//            }
+//        });
     }
 
 
